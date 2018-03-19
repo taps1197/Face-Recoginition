@@ -13,7 +13,7 @@ function cam() {
             }
         })
         .then(stream => {
-            video.src = URL.createObjectURL(stream);
+            video.srcObject = stream;
             video.onloadedmetadata = video.play()
         })
         .catch(err => console.error(err));
