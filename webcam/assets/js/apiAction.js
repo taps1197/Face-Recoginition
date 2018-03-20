@@ -1,4 +1,8 @@
 function apiAction(action, img, label, gallery) {
+    const bodyData = {
+        "image":`${img}`,
+    }
+    bodyData = action !== 'detect' ? { ...bodyData, "subject_id":`${label}`, "gallery_name":`${gallery}`} : bodyData;
     return fetch(`https://api.kairos.com/${action}`, {
             method: "POST",
             headers: {
@@ -6,11 +10,7 @@ function apiAction(action, img, label, gallery) {
                 "app_id": "de8961ac",
                 "app_key": "b3c5774797323ebd37f789662517a1f6"
             },
-            body: JSON.stringify({
-                "image": `${img}`,
-                "subject_id": `${label}`,
-                "gallery_name": `${gallery}`
-            })
+            body: JSON.stringify(bodyData)
         })
         .then(data => {
             return data.json();
